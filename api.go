@@ -44,3 +44,25 @@ func InventarioHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(inventario)
 }
+
+// Endpoint orden de trabajo
+func OrdenHandler(w http.ResponseWriter, r *http.Request) {
+	cliente := NewCliente("Wendy Quinga", "1720000000", "Hyundai Tucson")
+	repuesto := NewRepuesto("Filtro de aceite", 25.50, 10)
+	cantidad := 2
+
+	orden := NewOrdenTrabajo(cliente, repuesto, cantidad)
+
+	respuesta := map[string]interface{}{
+		"cliente":  cliente.Nombre,
+		"cedula":   cliente.Cedula,
+		"vehiculo": cliente.Vehiculo,
+		"repuesto": repuesto.Nombre,
+		"precio":   repuesto.Precio,
+		"cantidad": cantidad,
+		"total":    orden.total,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(respuesta)
+}
