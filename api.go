@@ -66,6 +66,7 @@ func OrdenHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(respuesta)
 }
+
 // Endpoint factura
 func FacturaHandler(w http.ResponseWriter, r *http.Request) {
 	cliente := NewCliente("Wendy Quinga", "1720000000", "Hyundai Tucson")
@@ -85,6 +86,67 @@ func FacturaHandler(w http.ResponseWriter, r *http.Request) {
 		"precio":   repuesto.Precio,
 		"cantidad": cantidad,
 		"total":    orden.total,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(respuesta)
+}
+
+// Endpoint cotización
+func CotizacionHandler(w http.ResponseWriter, r *http.Request) {
+	precio := 25.50
+	cantidad := 2
+	total := precio * float64(cantidad)
+
+	respuesta := map[string]interface{}{
+		"cliente":     "Wendy Quinga",
+		"vehiculo":    "Hyundai Tucson",
+		"producto":    "Filtro de aceite",
+		"precio":      precio,
+		"cantidad":    cantidad,
+		"total":       total,
+		"estado":      "Cotización generada",
+		"descripcion": "Cotización básica para venta de repuesto automotriz",
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(respuesta)
+}
+
+// Endpoint servicio
+func ServicioHandler(w http.ResponseWriter, r *http.Request) {
+	respuesta := map[string]interface{}{
+		"servicio":     "Mantenimiento preventivo",
+		"vehiculo":     "Hyundai Tucson",
+		"descripcion":  "Cambio de aceite, revisión de filtros y control general del vehículo",
+		"duracion":     "2 horas",
+		"estado":       "Disponible",
+		"especialidad": "Servicio automotriz HYUNDAI y multimarca",
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(respuesta)
+}
+
+// Endpoint resumen del sistema
+func ResumenHandler(w http.ResponseWriter, r *http.Request) {
+	respuesta := map[string]interface{}{
+		"proyecto":       "Sistema de Gestión E-commerce Automotriz",
+		"integrante":     "Wendy Quinga",
+		"lenguaje":       "Go",
+		"serializacion":  "JSON",
+		"servicios_web":  8,
+		"funcionalidades": []string{
+			"Gestión de clientes",
+			"Gestión de repuestos",
+			"Inventario",
+			"Cotización",
+			"Orden de trabajo",
+			"Facturación",
+			"Servicios automotrices",
+			"Resumen del sistema",
+		},
+		"estado": "Proyecto funcional",
 	}
 
 	w.Header().Set("Content-Type", "application/json")
