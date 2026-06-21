@@ -4,19 +4,19 @@ import "fmt"
 
 // Inventario administra la lista de repuestos disponibles.
 type Inventario struct {
-	repuestos []Repuesto
+	Repuestos []Repuesto `json:"repuestos"`
 }
 
 // AgregarRepuesto incorpora un repuesto al inventario.
 func (i *Inventario) AgregarRepuesto(repuesto Repuesto) {
-	i.repuestos = append(i.repuestos, repuesto)
+	i.Repuestos = append(i.Repuestos, repuesto)
 }
 
 // MostrarInventario imprime todos los repuestos registrados.
 func (i Inventario) MostrarInventario() {
 	fmt.Println("Inventario disponible:")
 
-	for _, repuesto := range i.repuestos {
+	for _, repuesto := range i.Repuestos {
 		repuesto.Mostrar()
 	}
 }
