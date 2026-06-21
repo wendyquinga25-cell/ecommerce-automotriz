@@ -66,3 +66,27 @@ func OrdenHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(respuesta)
 }
+// Endpoint factura
+func FacturaHandler(w http.ResponseWriter, r *http.Request) {
+	cliente := NewCliente("Wendy Quinga", "1720000000", "Hyundai Tucson")
+	repuesto := NewRepuesto("Filtro de aceite", 25.50, 10)
+	cantidad := 2
+
+	orden := NewOrdenTrabajo(cliente, repuesto, cantidad)
+	factura := NewFactura(orden)
+	factura.GenerarFactura()
+
+	respuesta := map[string]interface{}{
+		"mensaje":  "Factura generada correctamente",
+		"cliente":  cliente.Nombre,
+		"cedula":   cliente.Cedula,
+		"vehiculo": cliente.Vehiculo,
+		"producto": repuesto.Nombre,
+		"precio":   repuesto.Precio,
+		"cantidad": cantidad,
+		"total":    orden.total,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(respuesta)
+}

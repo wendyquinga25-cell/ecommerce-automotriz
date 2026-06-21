@@ -10,6 +10,7 @@ func IniciarServidor() {
 	http.HandleFunc("/repuesto", RepuestoHandler)
 	http.HandleFunc("/inventario", InventarioHandler)
 	http.HandleFunc("/orden", OrdenHandler)
+	http.HandleFunc("/factura", FacturaHandler)
 
 	fmt.Println("Servidor ejecutándose en http://localhost:8080")
 
